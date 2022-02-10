@@ -2,9 +2,10 @@ const express = require('express');
 const userControllerEmployees = require('./controllers/employees')
 const userControllerAddress = require('./controllers/addresses')
 const bodyParser = require('body-parser')
+require('dotenv').config()
 
 const app = express();
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 app.use(bodyParser.json())
 
