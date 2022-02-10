@@ -13,7 +13,6 @@ app.use('/employees', userControllerEmployees)
 app.use('/address', userControllerAddress)
 
 // app.use('/addresses', userControllerAddresses)
-
-
+app.get('/', (_req, res) => res.send(`<h1>porta: ${PORT}</h1>`))
 
 app.listen(PORT, () => console.log(`ouvindo na porta ${PORT}`))
