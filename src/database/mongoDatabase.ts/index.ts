@@ -1,4 +1,5 @@
-import { MongoClient } from 'mongodb'
+import { MongoClient, ObjectId, OptionalId } from 'mongodb'
+import { CollectionMethods } from '../../interfaces/DataBaseInterfaces'
 import dotev from 'dotenv'
 
 dotev.config()
@@ -35,4 +36,9 @@ export default class MongoDatabase<T> implements CollectionMethods<T> {
     return false
   }
 
+  async delete(id: string | number): Promise<boolean> {
+    const data = await this._collection.deleteOne({_id: new ObjectId(id)})
+    if(data.acknowledged === true) { return true }
+    return false
+  }
 }
