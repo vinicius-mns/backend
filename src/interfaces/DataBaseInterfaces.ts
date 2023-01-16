@@ -1,10 +1,3 @@
-import { Db } from 'mongodb'
-
-export interface PropsDatabase {
-  dbCollectionName: string
-  db?: Db
-}
-
 export interface CollectionMethods<T> {
   create(entite: T): Promise<boolean>
 
