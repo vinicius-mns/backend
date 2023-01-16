@@ -1,0 +1,23 @@
+{
+  "name": "Backend",
+  "version": "1.0.0",
+  "description": "Api em ts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinicius-mns/backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinicius-mns/backend/issues"
+  },
+  "homepage": "https://github.com/vinicius-mns/backend#readme",
+  "dependencies": {
+    "typescript": "^4.9.4"
+  }
+}
