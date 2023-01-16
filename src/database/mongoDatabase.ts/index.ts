@@ -29,4 +29,10 @@ export default class MongoDatabase<T> implements CollectionMethods<T> {
     return data
   }
 
+  async updateOne(id: string | number, entite: T): Promise<boolean> {
+    const data = await this._collection.updateOne({_id: new ObjectId(id)}, {$set: entite})
+    if(data.acknowledged === true) { return true }
+    return false
+  }
+
 }
