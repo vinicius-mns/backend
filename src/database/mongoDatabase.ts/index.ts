@@ -18,4 +18,10 @@ export default class MongoDatabase<T> implements CollectionMethods<T> {
     if(data.acknowledged === true) { return true }
     return false
   }
+
+  async readAll(): Promise<T[]> {
+    const data = await this._collection.find({}).toArray() as unknown as T[]
+    return data
+  }
+
 }
