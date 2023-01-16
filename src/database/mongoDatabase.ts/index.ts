@@ -24,4 +24,9 @@ export default class MongoDatabase<T> implements CollectionMethods<T> {
     return data
   }
 
+  async readOne(id: string | number): Promise<T | null> {
+    const data = await this._collection.findOne({_id: new ObjectId(id)}) as T | null
+    return data
+  }
+
 }
