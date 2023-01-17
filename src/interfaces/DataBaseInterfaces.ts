@@ -8,12 +8,12 @@ export interface IDataBase<T> {
     findOne(obj: {id: string}): Promise<T | null>
 
     updateOne(obj: {id: string},  set: {$set: T}): Promise<{acknowledged: boolean}>
-    
+
     deleteOne(obj: {id: string}): Promise<{acknowledged: boolean}>
   }
 }
 
-export interface ICollectionMetods<T> {
+export interface ICollectionMethods<T> {
   create(entite: T): Promise<boolean>
 
   readAll(): Promise<T[]>

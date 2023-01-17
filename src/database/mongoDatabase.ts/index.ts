@@ -1,5 +1,6 @@
-import { MongoClient, ObjectId, OptionalId } from 'mongodb'
-import { CollectionMethods } from '../../interfaces/DataBaseInterfaces'
+import { MongoClient } from 'mongodb'
+import { ICollectionMethods, IDataBase } from '../../interfaces/DataBaseInterfaces'
+import { v4 as uuidV4 } from 'uuid'
 import dotev from 'dotenv'
 
 dotev.config()
@@ -7,37 +8,42 @@ dotev.config()
 const uri = `mongodb+srv://vinicius:${process.env.PASS}@cluster0.2vla7ld.mongodb.net/?retryWrites=true&w=majority`
 const database = new MongoClient(uri).db('portifolio')
 
-export default class MongoDatabase<T> implements CollectionMethods<T> {
+export default class MongoDatabase<T> implements ICollectionMethods<T> {
   private _collection
 
-  constructor(private _collectionName: string, private _database = database) {
+  constructor(private _collectionName: string, private _database = database as unknown as IDataBase<T>) {
     this._collection = this._database.collection(this._collectionName)
   }
 
+  private newId(): string {
+    return uuidV4()
+  }
+
   async create(entite: T): Promise<boolean> {
-    const data = await this._collection.insertOne(entite as unknown as OptionalId<Document>)
+    const obj = { id: this.newId(), ...entite }
+    const data = await this._collection.insertOne(obj)
     if(data.acknowledged === true) { return true }
     return false
   }
 
   async readAll(): Promise<T[]> {
-    const data = await this._collection.find({}).toArray() as unknown as T[]
+    const data = await this._collection.find({}).toArray()
     return data
   }
 
-  async readOne(id: string | number): Promise<T | null> {
-    const data = await this._collection.findOne({_id: new ObjectId(id)}) as T | null
+  async readOne(id: string): Promise<T | null> {
+    const data = await this._collection.findOne({ id }) as T | null
     return data
   }
 
-  async updateOne(id: string | number, entite: T): Promise<boolean> {
-    const data = await this._collection.updateOne({_id: new ObjectId(id)}, {$set: entite})
+  async updateOne(id: string, entite: T): Promise<boolean> {
+    const data = await this._collection.updateOne({ id }, {$set: entite})
     if(data.acknowledged === true) { return true }
     return false
   }
 
-  async delete(id: string | number): Promise<boolean> {
-    const data = await this._collection.deleteOne({_id: new ObjectId(id)})
+  async delete(id: string): Promise<boolean> {
+    const data = await this._collection.deleteOne({ id })
     if(data.acknowledged === true) { return true }
     return false
   }
