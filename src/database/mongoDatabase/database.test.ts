@@ -44,3 +44,13 @@ class MockDatabase<T> implements IDataBase<T>{
     }
   }
 }
+
+describe('Databese', async () => {
+  const Database = new MongoDatabase<Schema>('vinicius', new MockDatabase())
+
+  it('É possivel cria uma nova entidade no banco dados', async() => {
+    const create = await Database.create({name: 'viniciusApenas'})
+
+    expect(create).toBe(true)
+  })
+})
