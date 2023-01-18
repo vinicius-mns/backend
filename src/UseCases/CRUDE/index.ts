@@ -21,4 +21,9 @@ export class UseCasesCRUDE<T> implements IUseCases<T> {
     const content = await this._database.readOne(id)
     return { statusCode: 200, content }
   }
+
+  async updateOne(id: string | number, entite: T) {
+    const content = await this._database.updateOne(id, entite)
+    return { statusCode: 200, content }
+  }
 }
