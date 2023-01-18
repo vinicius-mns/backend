@@ -1,9 +1,10 @@
 interface IhttpResponse<T> {
-  data: {statusCode: number, content: T}
+  statusCode: number
+  content: T
 }
 
 export interface IUseCases<T> {
-  create(entite: T): Promise<boolean>
+  create(entite: T): Promise<IhttpResponse<boolean>>
 
   readAll(): Promise<IhttpResponse<boolean>>
 
