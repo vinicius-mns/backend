@@ -16,4 +16,9 @@ export class UseCasesCRUDE<T> implements IUseCases<T> {
     const content = await this._database.readAll()
     return { statusCode: 200, content }
   }
+
+  async readOne(id: string | number) {
+    const content = await this._database.readOne(id)
+    return { statusCode: 200, content }
+  }
 }
