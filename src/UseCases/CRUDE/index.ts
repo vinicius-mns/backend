@@ -9,6 +9,11 @@ export class UseCasesCRUDE<T> implements IUseCases<T> {
     if(content === true) {
       return { statusCode: 201, content }
     }
-    return { statusCode: 201, content }
+    return { statusCode: 401, content }
+  }
+
+  async readAll() {
+    const content = await this._database.readAll()
+    return { statusCode: 200, content }
   }
 }

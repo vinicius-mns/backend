@@ -6,7 +6,7 @@ interface IhttpResponse<T> {
 export interface IUseCases<T> {
   create(entite: T): Promise<IhttpResponse<boolean>>
 
-  readAll(): Promise<IhttpResponse<boolean>>
+  readAll(): Promise<IhttpResponse<T[]>>
 
   readOne(id: string | number): Promise<IhttpResponse<T | null>>
 
