@@ -53,4 +53,15 @@ describe('Databese', async () => {
 
     expect(create).toBe(true)
   })
+
+  it('É possivel ler todas as entidades', async() => {
+    await Database.create({name: 'vinicius'})
+
+    const findAll = await Database.readAll()
+    const entite = findAll[findAll.length - 1]
+    
+    expect(entite).toHaveProperty('id')
+    expect(entite).toHaveProperty('name')
+    expect(entite.name).toEqual('vinicius')
+  })
 })
