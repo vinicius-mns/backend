@@ -45,7 +45,11 @@ export class MyRouters<T> {
   }
   
   get routers() {
+    this._create()
     this._readAll()
+    this._readOne()
+    this._update()
+    this._delete()
     return this._router
   }
 }
