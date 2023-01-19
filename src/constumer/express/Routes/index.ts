@@ -35,6 +35,14 @@ export class MyRouters<T> {
       return res.status(data.statusCode).json(data.content)
     })
   }
+
+  private _delete() {
+    return this._router.delete(`/${this._path}/update/:id`, async(req, res) => {
+      const { id } = req.params
+      const data = await this._useCase.delete(id)
+      return res.status(data.statusCode).json(data.content)
+    })
+  }
   
   get routers() {
     this._readAll()
