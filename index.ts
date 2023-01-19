@@ -1,15 +1,8 @@
-import express from 'express'
-import dotev from 'dotenv'
+import { MyExpress } from './src/constumer/express'
+import { quemsou } from './src/Core/Quemsou'
 
-dotev.config()
+const myExpress = new MyExpress()
 
-const app = express()
-const PORT = process.env.PORT || 3000
-
-app.get('/', function (_req, res) {
-  res.send('Hello World')
-})
-
-app.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}/`)
-})
+myExpress.useRoute([
+  quemsou.routers
+])
