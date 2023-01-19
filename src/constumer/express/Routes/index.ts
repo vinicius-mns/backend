@@ -37,7 +37,7 @@ export class MyRouters<T> {
   }
 
   private _delete() {
-    return this._router.delete(`/${this._path}/update/:id`, async(req, res) => {
+    return this._router.delete(`/${this._path}/delete/:id`, async(req, res) => {
       const { id } = req.params
       const data = await this._useCase.delete(id)
       return res.status(data.statusCode).json(data.content)
