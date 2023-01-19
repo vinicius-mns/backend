@@ -26,6 +26,15 @@ export class MyRouters<T> {
       return res.status(data.statusCode).json(data.content)
     })
   }
+
+  private _update() {
+    return this._router.put(`/${this._path}/update/:id`, async(req, res) => {
+      const { id } = req.params
+      const body = req.body
+      const data = await this._useCase.updateOne(id, body)
+      return res.status(data.statusCode).json(data.content)
+    })
+  }
   
   get routers() {
     this._readAll()
