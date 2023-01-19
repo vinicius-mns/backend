@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const PORT = process.env || 3002
+const PORT = process.env.PORT || 3002
 
 export class MyExpress {
 
@@ -18,7 +18,7 @@ export class MyExpress {
     })
   }
 
-  addRoute(r: Router[]) {
+  use(r: Router[]) {
     r.map(router => {
       this._express.use(router)
     })
