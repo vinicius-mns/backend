@@ -26,4 +26,9 @@ export class UseCasesCRUDE<T> implements IUseCases<T> {
     const content = await this._database.updateOne(id, entite)
     return { statusCode: 200, content }
   }
+
+  async delete(id: string | number) {
+    const content = await this._database.delete(id)
+    return { statusCode: 200, content }
+  }
 }
