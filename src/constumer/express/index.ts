@@ -18,9 +18,8 @@ export class MyExpress {
     })
   }
 
-  use(r: Router[]) {
-    r.map(router => {
-      this._express.use(router)
+  useRoute(router: Router) {
+    this._express.use(router)
     })
   }
 }
