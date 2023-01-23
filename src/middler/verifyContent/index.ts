@@ -2,7 +2,7 @@ export class Primitive {
 
   private static valitadeWithMessage(typeName: string, key: string, type: unknown) {
     if(typeof type !== typeName){
-      return `A chave: "${key}" esperava "string" mas recebeu: "${typeof type}"`
+      return `A chave: "${key}" esperava "${typeName}" mas recebeu: "${typeof type}"`
     }
   }
 
