@@ -1,3 +1,11 @@
+interface SafeParse {
+  validationSafeParse: (key:string, type: string | number, typeName?: string) => string | undefined
+}
+
+interface ObjectLinter {
+  [index: string ]: string | number
+}
+
 export class Primitive {
 
   private static valitadeWithMessage(typeName: string, key: string, type: unknown) {
