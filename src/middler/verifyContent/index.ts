@@ -6,6 +6,9 @@ interface ObjectLinter {
   [index: string ]: string | number
 }
 
+interface SchemaOBJ {
+  [index: string ]: SafeParse
+}
 export class Primitive {
 
   private static valitadeWithMessage(typeName: string, key: string, type: unknown) {
