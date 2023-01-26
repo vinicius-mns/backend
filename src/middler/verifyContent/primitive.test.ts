@@ -16,4 +16,11 @@ describe('Testando Classe Primitive', () => {
 
     expect(content).toBe('A chave: "adm" nao existe')
   })
+
+  it('Retorna erro ao passar propriedade diferente da definida no schema', () => {
+    const userWithPass = p.object({name: p.string(), pass: p.string()}) // pass do tipo string
+    const nada = userWithPass.safaParser({ name: 'vinicius', pass: 2 }) // pass sendo number
+
+    expect(nada).toBe('A chave: "pass" esperava "string" mas recebeu: "number"')
+  })
 })
