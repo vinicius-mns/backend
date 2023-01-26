@@ -45,6 +45,24 @@ export class Primitive {
     return err
   }
 
+  private static _verifyTypes(a: object, objValues: ObjectLinter) {
+    const err: { message: string | undefined, error: boolean } = { message: undefined, error: false }
+
+    const objRoles = Object.entries(a) as unknown as [ x:string, y: SafeParse ][]
+
+    for ( const [key, parseFunction] of objRoles ) {
+      const values = objValues[key]
+      const errMsg = parseFunction.validationSafeParse(key, values)
+
+      if(errMsg) {
+        err.error = true
+        err.message = errMsg
+      }
+    }
+
+    return err
+  }
+
   static object(obj: SchemaOBJ) {
     return {
       validate: (key:string, type: string, typeName='string') => this.valitadeWithMessage(typeName, key, type)
