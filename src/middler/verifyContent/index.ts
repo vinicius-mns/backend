@@ -63,6 +63,14 @@ export class Primitive {
     return err
   }
 
+  private static _safaParser (obj: SchemaOBJ, objx: ObjectLinter) {
+    const verifyKey = this._verifyAllKeys(obj, objx)
+    if(verifyKey.error) return verifyKey.message
+    
+    const verifyType = this._verifyTypes(obj, objx)
+    if(verifyType.error) return verifyType.message
+  }
+
   static object(obj: SchemaOBJ) {
     return {
       validate: (key:string, type: string, typeName='string') => this.valitadeWithMessage(typeName, key, type)
