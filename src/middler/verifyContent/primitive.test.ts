@@ -23,4 +23,11 @@ describe('Testando Classe Primitive', () => {
 
     expect(nada).toBe('A chave: "pass" esperava "string" mas recebeu: "number"')
   })
+
+  it('Nao retorna erro ao passar propriedades corretamente',() => {
+    const userWithPass = p.object({name: p.string(), pass: p.string()})
+    const content = userWithPass.safaParser({ name: 'vinicius', pass: 'senha' })
+
+    expect(content).toBe(undefined)
+  })
 })
