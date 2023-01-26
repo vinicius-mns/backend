@@ -18,6 +18,12 @@ export class Primitive {
     }
   }
 
+  static string(): SafeParse {
+    return {
+      validationSafeParse: (key:string, type: string | number, typeName='string') => this.valitadeWithMessage(typeName, key, type)
+    }
+  }
+
   private static _verifyAllKeys(schemaObj: SchemaOBJ, contentObj: ObjectLinter) {
     const ArrSchema = Object.keys(schemaObj)
     const ArrContent = Object.keys(contentObj)
