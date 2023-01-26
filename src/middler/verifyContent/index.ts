@@ -73,7 +73,7 @@ export class Primitive {
 
   static object(obj: SchemaOBJ) {
     return {
-      validate: (key:string, type: string, typeName='string') => this.valitadeWithMessage(typeName, key, type)
+      safaParser: (objx: ObjectLinter) => this._safaParser(obj, objx)
     }
   }
 }
