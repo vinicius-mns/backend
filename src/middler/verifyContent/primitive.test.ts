@@ -10,7 +10,10 @@ describe('Testando Classe Primitive', () => {
     expect(content).toBe('Está faltando a chave "pass"')
   })
 
+  it('Retorna erro ao passa "Chave" a mais',() => {
+    const userWithPass = p.object({name: p.string(), pass: p.string()}) // adm nao definido
+    const content = userWithPass.safaParser({ name: 'vinicius', pass: 'senha', adm: true }) // adm adicionado
+
+    expect(content).toBe('A chave: "adm" nao existe')
+  })
 })
-
-
-
