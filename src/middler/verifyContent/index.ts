@@ -18,6 +18,12 @@ export class Primitive {
     }
   }
 
+  static number(): SafeParse {
+    return {
+      validationSafeParse: (key:string, type: string | number, typeName='number') => this.valitadeWithMessage(typeName, key, type)
+    }
+  }
+
   static string(): SafeParse {
     return {
       validationSafeParse: (key:string, type: string | number, typeName='string') => this.valitadeWithMessage(typeName, key, type)
