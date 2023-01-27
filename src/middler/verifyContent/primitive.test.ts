@@ -27,7 +27,11 @@ describe('Testando Classe Primitive', () => {
   it('Nao retorna erro ao passar propriedades corretamente',() => {
     const userWithPass = p.object({name: p.string(), pass: p.string()})
     const content = userWithPass.safaParser({ name: 'vinicius', pass: 'senha' })
+    
+    const product = p.object({name: p.string(), quantity: p.number()})
+    const content2 = product.safaParser({name: 'bana', quantity: 2})
 
     expect(content).toBe(undefined)
+    expect(content2).toBe(undefined)
   })
 })
