@@ -1,6 +1,6 @@
 import { MyRouters } from '../constumer/express/Routes'
 import MongoDatabase from '../database/mongoDatabase'
-import { UseCasesCRUDE } from '../UseCases/CRUDE'
+import { UseCasesCRUDE } from '../useCases/CRUDE'
 
 interface Props {
   nameDbCollection: string
