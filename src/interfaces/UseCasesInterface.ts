@@ -1,4 +1,4 @@
-interface IhttpResponse<T> {
+export interface IhttpResponse<T> {
   statusCode: number
   content: T
 }

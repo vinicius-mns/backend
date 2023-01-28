@@ -1,8 +1,9 @@
 import { ICollectionMethods } from '../../interfaces/DataBaseInterfaces'
 import { IUseCases } from '../../interfaces/UseCasesInterface'
+import { StatusCode } from '../../utils/statusCode.ts'
 
 export class UseCasesCRUDE<T> implements IUseCases<T> {
-  constructor(private _database: ICollectionMethods<T>){}
+  constructor(private _database: ICollectionMethods<T>, private _status=StatusCode){}
 
   async create(entite: T) {
     const content = await this._database.create(entite)
