@@ -1,5 +1,3 @@
-import { IhttpResponse } from '../../interfaces/UseCasesInterface'
-
 export class StatusCode {
 
   static created<T>( content:T ) {
