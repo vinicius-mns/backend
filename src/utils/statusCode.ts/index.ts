@@ -13,6 +13,6 @@ export class StatusCode {
   }
 
   static unauthorized<T> ( content: T ) {
-    return { StatusCode: 401, content }
+    return { statusCode: 401, content }
   }
 }
