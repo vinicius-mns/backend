@@ -2,6 +2,7 @@
 import { describe, expect, it } from 'vitest'
 import { UseCasesCRUDE } from '.'
 import { ICollectionMethods } from '../../interfaces/DataBaseInterfaces'
+
 class mockSuccessDb<T> implements ICollectionMethods<T> {
 
   create(entite: T): Promise<boolean> {
@@ -41,3 +42,13 @@ class mockFailureDb<T> implements ICollectionMethods<T> {
     throw new Error('Method not implemented.')
   }
 }
+
+describe('UseCases Crude', () => {
+  it('Cria com sucesso', async () => {
+    const success = new UseCasesCRUDE<{name: string}>(new mockSuccessDb())
+    const createSuccess = await success.create({name: 'fulano'})
+
+    expect(createSuccess.statusCode).toBe(201)
+    expect(createSuccess.content).toEqual(true)
+  })
+})
