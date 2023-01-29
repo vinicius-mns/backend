@@ -8,9 +8,9 @@ export class UseCasesCRUDE<T> implements IUseCases<T> {
   async create(entite: T) {
     const content = await this._database.create(entite)
     if(content === true) {
-      return { statusCode: 201, content }
+      return this._status.created(content)
     }
-    return { statusCode: 401, content }
+    return this._status.unauthorized(content)
   }
 
   async readAll() {
