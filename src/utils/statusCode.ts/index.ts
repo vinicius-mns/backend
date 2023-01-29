@@ -13,4 +13,8 @@ export class StatusCode {
   static badRequest<T>( content:T ) {
     return { statusCode: 400, content }
   }
+
+  static unauthorized<T> ( content: T ) {
+    return { StatusCode: 401, content }
+  }
 }
