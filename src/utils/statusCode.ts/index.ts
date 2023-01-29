@@ -9,4 +9,8 @@ export class StatusCode {
   static ok<T>( content:T ) {
     return { statusCode: 200, content }
   }
+
+  static badRequest<T>( content:T ) {
+    return { statusCode: 400, content }
+  }
 }
