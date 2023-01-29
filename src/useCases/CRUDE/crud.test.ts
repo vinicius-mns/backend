@@ -16,7 +16,18 @@ class mockSuccessDb<T> implements ICollectionMethods<T> {
     ]))
   }
   readOne(id: string | number): Promise<T | null> {
-    return new Promise((resolve,) => resolve({name: 'v'} as unknown as T))
+    const list = [
+      {id: '1', name: 'v'},
+      {id: '2', name: 't'},
+      {id: '3', name: 'm'},
+    ]
+
+    for(const obj of list) {
+      if(obj.id === id){
+        return new Promise((resolve,) => resolve(obj as unknown as T))
+      }
+    }
+    return new Promise((resolve,) => resolve(null))
   }
   updateOne(id: string | number, entite: T): Promise<boolean> {
     throw new Error('Method not implemented.')
@@ -73,9 +84,12 @@ describe('UseCases Crude', () => {
 
   it('Procura com id com sucesso', async () => {
     const success = new UseCasesCRUDE<{name: string}>(new mockSuccessDb())
-    const readOneSuccess = await success.readOne('1123')
+    const readOneSuccess = await success.readOne('2')
+    const readOneSuccessEmpty = await success.readOne('123')
   
     expect(readOneSuccess.statusCode).toBe(200)
-    expect(readOneSuccess.content).toEqual({name: 'v'})
+    expect(readOneSuccess.content).contain({name: 't'})
+    expect(readOneSuccess.content).contain({id: '2'})
+    expect(readOneSuccessEmpty.content).toBe(null)
   })
 })
