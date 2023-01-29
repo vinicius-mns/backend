@@ -6,7 +6,7 @@ export class StatusCode {
     return { statusCode: 201, content }
   }
 
-  static create<T>(statusCode: number, content:T): IhttpResponse<T> {
-    return { statusCode, content }
+  static ok<T>( content:T ) {
+    return { statusCode: 200, content }
   }
 }
