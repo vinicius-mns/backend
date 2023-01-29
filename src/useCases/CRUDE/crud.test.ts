@@ -51,4 +51,12 @@ describe('UseCases Crude', () => {
     expect(createSuccess.statusCode).toBe(201)
     expect(createSuccess.content).toEqual(true)
   })
+
+  it('Erro ao criar', async () => {
+    const error = new UseCasesCRUDE<{name: string}>(new mockFailureDb())
+    const createFailure = await error.create({name: 'fulano'})
+
+    expect(createFailure.statusCode).toBe(401)
+    expect(createFailure.content).toEqual(false)
+  })
 })
