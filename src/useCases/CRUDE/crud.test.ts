@@ -46,7 +46,13 @@ class mockSuccessDb<T> implements ICollectionMethods<T> {
   }
   
   delete(id: string | number): Promise<boolean> {
-    throw new Error('Method not implemented.')
+    for(const obj of this._list) {
+      if(obj.id === id){
+        this._list.splice( this._list.indexOf(obj), 1 )
+        return new Promise((resolve) => resolve(true))
+      }
+    }
+    return new Promise((resolve,) => resolve(false))
   }
 }
 
@@ -121,5 +127,15 @@ describe('UseCases Crude', () => {
 
     const updatedNoIdFound = await success.updateOne('9999', {name: 'new name'})
     expect(updatedNoIdFound.content).toBe(false)
+  })
+
+  it('Deleta entidade com sucesso', async () => {
+    const success = new UseCasesCRUDE<{name: string}>(new mockSuccessDb())
+
+    const deletedSucess = await success.delete('1')
+    expect(deletedSucess.content).toBe(true)
+
+    const findOne = await success.readOne('1')
+    expect(findOne.content).toBe(null)
   })
 })
