@@ -5,6 +5,12 @@ import { ICollectionMethods } from '../../interfaces/DataBaseInterfaces'
 
 class mockSuccessDb<T> implements ICollectionMethods<T> {
 
+  private _list = [
+    {id: '1', name: 'v'},
+    {id: '2', name: 't'},
+    {id: '3', name: 'm'},
+  ]
+
   create(entite: T): Promise<boolean> {
     return new Promise((resolve,) => resolve(true))
   }
@@ -16,13 +22,7 @@ class mockSuccessDb<T> implements ICollectionMethods<T> {
     ]))
   }
   readOne(id: string | number): Promise<T | null> {
-    const list = [
-      {id: '1', name: 'v'},
-      {id: '2', name: 't'},
-      {id: '3', name: 'm'},
-    ]
-
-    for(const obj of list) {
+    for(const obj of this._list) {
       if(obj.id === id){
         return new Promise((resolve,) => resolve(obj as unknown as T))
       }
