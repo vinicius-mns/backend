@@ -101,7 +101,7 @@ describe('UseCases Crude', () => {
     expect(readAllSuccess.content[0]).contain(list[0])
   })
 
-  it('Procura com id com sucesso', async () => {
+  it('Procura entidade por id com sucesso', async () => {
     const success = new UseCasesCRUDE<{name: string}>(new mockSuccessDb())
     const readOneSuccess = await success.readOne('2')
     const readOneSuccessEmpty = await success.readOne('123')
@@ -112,7 +112,7 @@ describe('UseCases Crude', () => {
     expect(readOneSuccessEmpty.content).toBe(null)
   })
 
-  it('Atualiza com sucesso', async () => {
+  it('Atualiza entidade com sucesso', async () => {
     const success = new UseCasesCRUDE<{name: string}>(new mockSuccessDb())
 
     const findOne = await success.readOne('1')
@@ -123,9 +123,11 @@ describe('UseCases Crude', () => {
     expect(updatedSuccess.content).toBe(true)
     
     const updated = await success.readOne('1')
+    expect(updated.statusCode).toBe(200)
     expect(updated.content).contain({name: 'abc'})
 
     const updatedNoIdFound = await success.updateOne('9999', {name: 'new name'})
+    expect(updatedNoIdFound.statusCode).toBe(200)
     expect(updatedNoIdFound.content).toBe(false)
   })
 
@@ -133,9 +135,14 @@ describe('UseCases Crude', () => {
     const success = new UseCasesCRUDE<{name: string}>(new mockSuccessDb())
 
     const deletedSucess = await success.delete('1')
+    expect(deletedSucess.statusCode).toBe(200)
     expect(deletedSucess.content).toBe(true)
 
+    const deleteEmptyId = await success.delete('999')
+    expect(deleteEmptyId.content).toBe(false)
+
     const findOne = await success.readOne('1')
+    expect(findOne.statusCode).toBe(200)
     expect(findOne.content).toBe(null)
   })
 })
