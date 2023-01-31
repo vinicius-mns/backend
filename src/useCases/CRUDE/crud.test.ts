@@ -3,13 +3,15 @@ import { describe, expect, it } from 'vitest'
 import { UseCasesCRUDE } from '.'
 import { ICollectionMethods } from '../../interfaces/DataBaseInterfaces'
 
+const list = [
+  {id: '1', name: 'v'},
+  {id: '2', name: 't'},
+  {id: '3', name: 'm'},
+]
+
 class mockSuccessDb<T> implements ICollectionMethods<T> {
 
-  private _list = [
-    {id: '1', name: 'v'},
-    {id: '2', name: 't'},
-    {id: '3', name: 'm'},
-  ]
+  private _list = list
 
   create(entite: T): Promise<boolean> {
     return new Promise((resolve,) => resolve(true))
