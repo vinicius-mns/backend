@@ -77,7 +77,7 @@ class mockFailureDb<T> implements ICollectionMethods<T> {
 }
 
 describe('UseCases Crude', () => {
-  it('Cria com sucesso', async () => {
+  it('Cria entidade com sucesso', async () => {
     const success = new UseCasesCRUDE<{name: string}>(new mockSuccessDb())
     const createSuccess = await success.create({name: 'fulano'})
 
@@ -93,7 +93,7 @@ describe('UseCases Crude', () => {
     expect(createFailure.content).toEqual(false)
   })
 
-  it('Retorna todos com sucesso', async () => {
+  it('Retorna todas entidades com sucesso', async () => {
     const success = new UseCasesCRUDE<{name: string}>(new mockSuccessDb())
     const readAllSuccess = await success.readAll()
   
