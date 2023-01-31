@@ -18,10 +18,7 @@ class mockSuccessDb<T> implements ICollectionMethods<T> {
   }
 
   readAll(): Promise<T[]> {
-    return new Promise((resolve,) => resolve([
-      {name: 'v'} as unknown as T,
-      {name: 'v'} as unknown as T,
-    ]))
+    return new Promise((resolve,) => resolve(this._list as unknown as T[]))
   }
 
   readOne(id: string | number): Promise<T | null> {
@@ -100,7 +97,8 @@ describe('UseCases Crude', () => {
     const readAllSuccess = await success.readAll()
   
     expect(readAllSuccess.statusCode).toBe(200)
-    expect(readAllSuccess.content).toEqual([{name: 'v'}, {name: 'v'}])
+    expect(readAllSuccess.content.length).toBe(3)
+    expect(readAllSuccess.content[0]).contain(list[0])
   })
 
   it('Procura com id com sucesso', async () => {
