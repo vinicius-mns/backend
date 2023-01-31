@@ -21,6 +21,7 @@ class mockSuccessDb<T> implements ICollectionMethods<T> {
       {name: 'v'} as unknown as T,
     ]))
   }
+
   readOne(id: string | number): Promise<T | null> {
     for(const obj of this._list) {
       if(obj.id === id){
@@ -29,9 +30,21 @@ class mockSuccessDb<T> implements ICollectionMethods<T> {
     }
     return new Promise((resolve,) => resolve(null))
   }
+
   updateOne(id: string | number, entite: T): Promise<boolean> {
-    throw new Error('Method not implemented.')
+    for(const obj of this._list) {
+      if(obj.id === id){
+        this._list.splice(
+          this._list.indexOf(obj),
+          1,
+          {id ,...entite} as unknown as {id: string, name: string}
+        )
+        return new Promise((resolve) => resolve(true))
+      }
+    }
+    return new Promise((resolve,) => resolve(false))
   }
+  
   delete(id: string | number): Promise<boolean> {
     throw new Error('Method not implemented.')
   }
@@ -91,5 +104,22 @@ describe('UseCases Crude', () => {
     expect(readOneSuccess.content).contain({name: 't'})
     expect(readOneSuccess.content).contain({id: '2'})
     expect(readOneSuccessEmpty.content).toBe(null)
+  })
+
+  it('Atualiza com sucesso', async () => {
+    const success = new UseCasesCRUDE<{name: string}>(new mockSuccessDb())
+
+    const findOne = await success.readOne('1')
+    expect(findOne.content).contain({name: 'v'})        
+
+    const updatedSuccess = await success.updateOne('1', {name: 'abc'})
+    expect(updatedSuccess.statusCode).toBe(200)
+    expect(updatedSuccess.content).toBe(true)
+    
+    const updated = await success.readOne('1')
+    expect(updated.content).contain({name: 'abc'})
+
+    const updatedNoIdFound = await success.updateOne('9999', {name: 'new name'})
+    expect(updatedNoIdFound.content).toBe(false)
   })
 })
