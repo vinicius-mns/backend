@@ -1,3 +1,6 @@
+interface PrimitiveValidation<T> {
+  validate(arg: T, key: string): undefined | string
+}
 export class Schema {
 
   static string() {
