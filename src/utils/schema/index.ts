@@ -3,9 +3,11 @@ interface PrimitiveValidation<T> {
 }
 export class Schema {
 
-  static string() {
+  static string(): PrimitiveValidation<'string'> {
     return {
-      validate: (arg: string | unknown) => {if(typeof arg !== 'string') return 'nao é string'}
+      validate: (arg: string, key: string)  => {
+        if(typeof arg !== 'string') return `A key: "${key}" esperava o tipo "STRING" mas recebeu: ${typeof arg}`
+      }
     }
   }
 
