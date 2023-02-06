@@ -11,6 +11,14 @@ export class Schema {
     }
   }
 
+  static object(): PrimitiveValidation<'object'> {
+    return {
+      validate: (arg: string, key: string)  => {
+        if(typeof arg !== 'object') return `A key: "${key}" esperava o tipo "OBJECT" mas recebeu: ${typeof arg}`
+      }
+    }
+  }
+
   public static define(schemaObj: object) {
     return {
       compare: (currentObj: object) => this._compare(schemaObj, currentObj)
