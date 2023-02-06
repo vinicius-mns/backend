@@ -13,9 +13,26 @@ export class Schema {
 
   public static define(schemaObj: object) {
     return {
-      compare: (currentObj: object) => this.compare(schemaObj, currentObj)
+      compare: (currentObj: object) => this._compare(schemaObj, currentObj)
     }
   }
+
+  private static _validateSchemaObj(schemaObj: object){
+    const validateSchemaObj = this._isObject(schemaObj, 'Define')
+    if(validateSchemaObj) return validateSchemaObj
+
+    const entries = Object.entries(schemaObj)
+
+    for(const [key, value] of entries){
+      if(typeof value === 'string') {
+        return `Define - "${key}" nao pode receber o tipo: "string" como valor`
+      }
+
+      if(typeof value === 'number') {
+        return `Define - "${key}" nao pode receber o tipo: "number" como valor`
+      }
+    }
+  } 
 
   public static compare(schemaObj: object, currentObj: object) {
 
