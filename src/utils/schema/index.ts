@@ -33,14 +33,18 @@ export class Schema {
 
     for(const [key, value] of entries){
       if(typeof value === 'string') {
-        return `Define - "${key}" nao pode receber o tipo: "string" como valor`
+        return `Define - A chave "${key}" nao pode receber o tipo: "string" como valor`
       }
 
       if(typeof value === 'number') {
-        return `Define - "${key}" nao pode receber o tipo: "number" como valor`
+        return `Define - A chave "${key}" nao pode receber o tipo: "number" como valor`
+      }
+
+      if(!('validate' in value && typeof value.validate === 'function')){
+        return 'Define recebeu metodo nao esperado.'
       }
     }
-  } 
+  }
 
   public static compare(schemaObj: object, currentObj: object) {
 
