@@ -14,6 +14,18 @@ describe('Schema', () => {
     expect(verify).toBe(undefined)
   })
 
+  it('Cria um obj simples com string', () => {
+    const user = s.object({
+      name: s.string()
+    })
+
+    const verify = user.compare({
+      name: null
+    })
+
+    expect(verify).toBe('Compare - A propriedade "name" pode estar vazia')
+  })
+
   it('Retorna erro ao passar propriedade simples diferente do Schema', () => {
     const user = s.object({
       name: s.string()
