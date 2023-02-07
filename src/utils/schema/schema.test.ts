@@ -63,4 +63,24 @@ describe('Schema', () => {
 
     expect(verify).toBe('Compare - Não pode ser um objeto vazio')
   })
+
+  it('Retorna erro o nao passar proriedade dentro de objeto', () => {
+    const user = s.object({
+      name: s.string(),
+      contact: s.object({
+        email: s.string(),
+        phone: s.number(),
+      })
+    })
+
+    const verify = user.compare({
+      name: 'vinicius',
+      contact: {
+        email: 'vinicius',
+        phone: null
+      }
+    })
+
+    expect(verify).toBe('Compare - A propriedade "phone" pode estar vazia')
+  })
 })
