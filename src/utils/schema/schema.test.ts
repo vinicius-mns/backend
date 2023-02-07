@@ -45,4 +45,22 @@ describe('Schema', () => {
 
     expect(verify).toBe(undefined)
   })
+
+  it('Retona erro ao passar obj vazio', () => {
+    const user = s.object({
+      name: s.string(),
+      contact: s.object({
+        email: s.string(),
+        phone: s.number(),
+      })
+    })
+
+    const verify = user.compare({
+      name: 'vinicius',
+      contact: {
+      }
+    })
+
+    expect(verify).toBe('Compare - Não pode ser um objeto vazio')
+  })
 })
