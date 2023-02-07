@@ -25,4 +25,24 @@ describe('Schema', () => {
 
     expect(verify).toBe('A key: "name" esperava o tipo "STRING" mas recebeu: number')
   })
+
+  it('E possivel adicionar objeto dentro de objeto', () => {
+    const user = s.object({
+      name: s.string(),
+      contact: s.object({
+        email: s.string(),
+        phone: s.number(),
+      })
+    })
+
+    const verify = user.compare({
+      name: 'vinicius',
+      contact: {
+        email: 'vininicius',
+        phone: 1234
+      }
+    })
+
+    expect(verify).toBe(undefined)
+  })
 })
