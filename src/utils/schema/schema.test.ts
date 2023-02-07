@@ -13,4 +13,16 @@ describe('Schema', () => {
 
     expect(verify).toBe(undefined)
   })
+
+  it('Retorna erro ao passar propriedade simples diferente do Schema', () => {
+    const user = s.object({
+      name: s.string()
+    })
+
+    const verify = user.compare({
+      name: 2
+    })
+
+    expect(verify).toBe('A key: "name" esperava o tipo "STRING" mas recebeu: number')
+  })
 })
