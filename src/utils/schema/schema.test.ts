@@ -58,7 +58,7 @@ describe('Schema', () => {
     expect(verify).toBe(undefined)
   })
 
-  it('Retona erro ao passar obj vazio', () => {
+  it('Retorna erro ao passar obj vazio', () => {
     const user = s.object({
       name: s.string(),
       contact: s.object({
