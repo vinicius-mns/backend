@@ -1,3 +1,5 @@
+import { Helper } from './Helper'
+
 interface PrimitiveValidation<T> {
   validate(arg: T, key: string): undefined | string
 }
