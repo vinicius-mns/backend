@@ -31,4 +31,18 @@ describe('Helper', () => {
       expect(h.Errors[2]).toEqual({ObjectError:'null deve ser do tipo "object"'})
     })
   })
+  
+  describe('.notHasEmptyValues', () => {
+
+    it('Nao retorna erro ao passar {key : value}', () => {
+      const h = new Helper()
+
+      h.object({name: 'vinicius'}).notHasEmptyValues()
+      h.object({email: 'vinicius'}).notHasEmptyValues()
+      h.object({age: 123}).notHasEmptyValues()
+
+      expect(h.Errors).toEqual([])
+    })
+
+  })
 })
