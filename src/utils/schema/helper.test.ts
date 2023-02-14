@@ -15,5 +15,20 @@ describe('Helper', () => {
   
       expect(h.Errors).toEqual([])
     })
+
+    it('Nao passar "object" como props retorna erro', () => {
+  
+      const h = new Helper()
+  
+      h.object(2).isObject()
+      h.object('vinicius').isObject()
+      h.object(null).isObject()
+  
+      expect(h.Errors).length(3)
+  
+      expect(h.Errors[0]).toEqual({ObjectError:'2 deve ser do tipo "object"'})
+      expect(h.Errors[1]).toEqual({ObjectError:'vinicius deve ser do tipo "object"'})
+      expect(h.Errors[2]).toEqual({ObjectError:'null deve ser do tipo "object"'})
+    })
   })
 })
