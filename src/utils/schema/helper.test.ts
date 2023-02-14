@@ -43,6 +43,17 @@ describe('Helper', () => {
 
       expect(h.Errors).toEqual([])
     })
+    
+    it('Retorna erro ao nao passar {key : value}', () => {
+      const h = new Helper()
+
+      h.object({name: null}).notHasEmptyValues()
+      h.object({email: ''}).notHasEmptyValues()
+      h.object({age: 0}).notHasEmptyValues()
+
+      expect(h.Errors).length(3)
+      expect(h.Errors[0]).toEqual({ValueError: 'name nao pode receber valor Nulo ou Vazio'})
+    })
 
   })
 })
