@@ -34,11 +34,20 @@ export class Helper {
   }
 
 
+  private _isNotEmptyObject(obj: object, key?: string) {
+    if( Object.keys(obj).length < 1 ) {
+      this.Errors.push({ObjectError: `${JSON.stringify(key || obj)} - Não pode ser um objeto vazio`})
+    }
+
+    return this.object(obj)
+  }
+
   public object(obj: unknown) {
     return {
       isObject: (key?: string) => this._isOject(obj, key),
       notHasEmptyValues: () => this._notHasEmptyValues(obj as object),
       haveKey: (key: string) => this._haveKey(obj as object, key),
+      isNotEmptyObject: (key?: string) => this._isNotEmptyObject(obj as object, key),
     }
   }
 
