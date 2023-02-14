@@ -56,4 +56,14 @@ describe('Helper', () => {
     })
 
   })
+
+  describe('.haveKey', () => {
+    it('Nao retorna erro caso tenha a chave', () => {
+      const h = new Helper()
+
+      h.object({name: 'vinicius'}).haveKey('name')
+
+      expect(h.Errors).toEqual([])
+    })
+  })
 })
