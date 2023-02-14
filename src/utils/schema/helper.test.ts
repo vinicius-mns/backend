@@ -85,5 +85,15 @@ describe('Helper', () => {
 
       expect(h.Errors).length(0)
     })
+
+    it('Retona erro ao nao passar objeto com propriedades', () => {
+      const h = new Helper()
+
+      h.object({name: 'vinicius'}).isNotEmptyObject()
+      h.object({}).isNotEmptyObject()
+
+      expect(h.Errors).length(1)
+      expect(h.Errors[0]).toEqual({ObjectError: '{} - Não pode ser um objeto vazio'})
+    })
   })
 })
