@@ -5,15 +5,15 @@ interface MsgError {
 export class Helper {
   public Errors: MsgError[] = []
 
-  private _isOject(obj: object, key?: string) {
+  private _isOject(obj: object | unknown, key?: string) {
     if(typeof obj !== 'object' || obj === null ){
       this.Errors.push({ObjectError: `${key || obj} deve ser do tipo "object"`})
+    } else {
+      return this.object(obj)
     }
-
-    return this.object(obj)
   }
 
-  public object(obj: object) {
+  public object(obj: unknown) {
     return {
       isObject: (key?: string) => this._isOject(obj, key),
     }
