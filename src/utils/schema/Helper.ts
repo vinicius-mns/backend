@@ -12,11 +12,23 @@ export class Helper {
 
     return this.object(obj)
   }
+
+  private _notHasEmptyValues(obj: object) {
+    const entries = Object.entries(obj)
+    
+    for( const [ key, value ] of entries) {
+      if(!value) {
+        this.Errors.push({ValueError: `${key} nao pode receber valor Nulo ou Vazio`})
+      }
+    }
+
+    return this.object(obj)
   }
 
   public object(obj: unknown) {
     return {
       isObject: (key?: string) => this._isOject(obj, key),
+      notHasEmptyValues: () => this._notHasEmptyValues(obj as object),
     }
   }
 
