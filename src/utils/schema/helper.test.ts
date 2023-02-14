@@ -75,4 +75,15 @@ describe('Helper', () => {
       expect(h.Errors[0]).toEqual({PropsError: 'O objeto {"name":"vinicius"} esperava receber chave "age" do tipo number'})
     })
   })
+
+  describe('.isNotEmptyObject', () => {
+    it('Nao retona erro ao passar objeto com propriedades', () => {
+      const h = new Helper()
+
+      h.object({name: 'vinicius'}).isNotEmptyObject()
+      h.object({age: 123}).isNotEmptyObject()
+
+      expect(h.Errors).length(0)
+    })
+  })
 })
