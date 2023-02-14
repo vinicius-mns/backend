@@ -25,10 +25,20 @@ export class Helper {
     return this.object(obj)
   }
 
+  private _haveKey(obj: object, key: string) {
+    if( !(key in obj) ){
+      this.Errors.push({PropsError: `O objeto ${JSON.stringify(obj)} esperava receber chave "${key}"`})
+    }
+
+    return this.object(obj)
+  }
+
+
   public object(obj: unknown) {
     return {
       isObject: (key?: string) => this._isOject(obj, key),
       notHasEmptyValues: () => this._notHasEmptyValues(obj as object),
+      haveKey: (key: string) => this._haveKey(obj as object, key),
     }
   }
 
