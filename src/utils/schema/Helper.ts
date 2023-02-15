@@ -33,12 +33,20 @@ export class Helper {
     return this.object(obj)
   }
 
-
   private _isNotEmptyObject(obj: object, key?: string) {
     if( Object.keys(obj).length < 1 ) {
       this.Errors.push({ObjectError: `${JSON.stringify(key || obj)} - Não pode ser um objeto vazio`})
     }
 
+    return this.object(obj)
+  }
+
+  private _haveAnyOfTheseKeys(obj: object, keys: string[], key: string) {
+
+    if(!(keys.includes(Object.keys(obj)[0]))){
+      this.Errors.push({PropsError: `${key} precisa reveber um obj com uma das seguintes propriedades: [${keys}]`})
+    }
+    
     return this.object(obj)
   }
 
@@ -48,6 +56,7 @@ export class Helper {
       notHasEmptyValues: () => this._notHasEmptyValues(obj as object),
       haveKey: (key: string) => this._haveKey(obj as object, key),
       isNotEmptyObject: (key?: string) => this._isNotEmptyObject(obj as object, key),
+      haveAnyOfTheseKeys: (keys: string[], key: string) => this._haveAnyOfTheseKeys(obj as object, keys, key),
     }
   }
 
