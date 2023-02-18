@@ -50,6 +50,11 @@ export class Helper {
     return this.object(obj)
   }
 
+  private _entries(obj: object) {
+    return Object.entries(obj)
+  }
+
+
   public object(obj: unknown) {
     return {
       isObject: (key?: string) => this._isOject(obj, key),
@@ -57,6 +62,9 @@ export class Helper {
       haveKey: (key: string) => this._haveKey(obj as object, key),
       isNotEmptyObject: (key?: string) => this._isNotEmptyObject(obj as object, key),
       haveAnyOfTheseKeys: (keys: string[], key: string) => this._haveAnyOfTheseKeys(obj as object, keys, key),
+      return: {
+        entries: () => this._entries(obj as object)
+      }
     }
   }
 
