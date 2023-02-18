@@ -68,4 +68,10 @@ export class Helper {
     }
   }
 
+  public throwError(error: string, typeError: string){
+    if(error) {
+      return this.Errors.push({typeError, error})
+    }
+  }
+
 }
