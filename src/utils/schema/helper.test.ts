@@ -72,7 +72,7 @@ describe('Helper', () => {
       h.object({name: 'vinicius'}).haveKey('age')
 
       expect(h.Errors).length(1)
-      expect(h.Errors[0]).toEqual({PropsError: 'O objeto {"name":"vinicius"} esperava receber chave "age" do tipo number'})
+      expect(h.Errors[0]).toEqual({PropsError: 'O objeto {"name":"vinicius"} esperava receber chave "age"'})
     })
   })
 
