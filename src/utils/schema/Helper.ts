@@ -1,4 +1,4 @@
-interface MsgError { 
+export interface MsgError { 
   [key: string] : string
 }
 
